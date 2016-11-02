@@ -1,4 +1,10 @@
 <?php
+
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
 function name($FN, $LN, $position) { #function designed to aid in positioning names. Takes the position of the name in the entry and formats it appropriately.
 	switch($position):
 		Case (1):
@@ -217,7 +223,7 @@ if (!empty($_POST['footIWPCsubmit'])) {
 
 ###handles form for internet resources without print version.
 if (!empty($_POST['footINPCsubmit'])) {
-	$response= "\"".$_POST["AT"].",\""." ".$_POST["ST"].", ".$_POST["url"]".";
+	$response= "\"".$_POST["AT"].",\""." ".$_POST["ST"].", ".$_POST["url"].".";
 	echo $response;
 }
 
