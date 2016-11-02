@@ -1,5 +1,5 @@
 <?php
-function name($FN, $LN, $position) {
+function name($FN, $LN, $position) { #function designed to aid in positioning names. Takes the position of the name in the entry and formats it appropriately.
 	switch($position):
 		Case (1):
 			if (preg_match('/ .\./', $FN)==true)
@@ -112,7 +112,7 @@ if (!empty($_POST['IWPCsubmit'])) {
 
 ###handles form for internet resources without print version.
 if (!empty($_POST['INPCsubmit'])) {
-	$response= "\"".$_POST["AT"]."\""." ".$_POST["ST"]." ".$_POST["url"];
+	$response= "\"".$_POST["AT"].".\""." ".$_POST["ST"].". ".$_POST["url"].".";
 	echo $response;
 }
 ############################
@@ -217,7 +217,7 @@ if (!empty($_POST['footIWPCsubmit'])) {
 
 ###handles form for internet resources without print version.
 if (!empty($_POST['footINPCsubmit'])) {
-	$response= "\"".$_POST["AT"]."\""." ".$_POST["ST"]." ".$_POST["url"];
+	$response= "\"".$_POST["AT"].",\""." ".$_POST["ST"].", ".$_POST["url"]".";
 	echo $response;
 }
 
@@ -232,14 +232,14 @@ if (!empty($_POST['footINPCsubmit'])) {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-<form id="style" name="style">
+<form id="style" name="style"> <!--- radio buttons to select entry type. Selecting one turns off the forms for the other--->
   <input type="radio" name="radio" id="foot" value="foot"/>Footnote<br>
   <input type="radio" name="radio" id="bib" value="bib"/> Bibliography<br>
 </form>
 
 
 
-<form id="Bib Form Selector" style="display:none"> <!---dropdown bar for form selection-->
+<form id="Bib Form Selector" style="display:none"> <!---dropdown bar for form selection for bibliography entries-->
 <select id="mybibselect" form="Form Selector">
 <option value="" selected="selected">Select Resource Type</option>
 <option value="bookswauthors">Books with up to three authors</option>
@@ -700,7 +700,7 @@ URL: <input type="text" name="url" value="">
 
 <!---begin JavaScript--->
 <script>
-if(document.getElementById('foot').checked=true) {
+if(document.getElementById('foot').checked=true) {  ///hides bibliography forms when the footnote button is selected
 document.getElementById("foot").addEventListener("click", function(){
 	document.getElementById("Bib Form Selector").style.display="none"
 	document.getElementById("bibdata").style.display="none"
@@ -710,7 +710,7 @@ document.getElementById("foot").addEventListener("click", function(){
 });}
 
 if(document.getElementById('bib').checked=true) {
-document.getElementById("bib").addEventListener("click", function(){
+document.getElementById("bib").addEventListener("click", function(){ ///hides footnote forms when the bibliography button is selected
 	document.getElementById("Bib Form Selector").style.display="block"
 	document.getElementById("bibdata").style.display="block"
 	document.getElementById("footdata").style.display="none"
@@ -719,11 +719,11 @@ document.getElementById("bib").addEventListener("click", function(){
 
 
 
-$("#mybibselect").on("change", function() {
+$("#mybibselect").on("change", function() { //allows only one form at a time to be visibble for bibliography entries
     $("#" + $(this).val()).show().siblings().hide();
 })
 
-$("#myfootselect").on("change", function() {
+$("#myfootselect").on("change", function() { //allows only one form at a time to be visible for footnote entires
     $("#" + $(this).val()).show().siblings().hide();
 })
 
